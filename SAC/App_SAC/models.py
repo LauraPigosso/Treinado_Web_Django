@@ -26,6 +26,7 @@ class Atendente(models.Model):
     def __str__(self):
         return self.nome_atend
 
+
 class Departamento(models.Model):
     descricao_departamento = models.CharField(max_length=30, null=False)
     info_departamento = models.TextField(null=True)
@@ -33,6 +34,7 @@ class Departamento(models.Model):
 
     def __str__(self):
         return self.descricao_departamento
+
 
 class Situacao(models.Model):
     descricao_situacao = models.CharField(max_length=30, null=False)

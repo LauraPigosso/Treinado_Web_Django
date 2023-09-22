@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <title>Programação Web Back End</title>
+</head>
+
+<header class="login">
+    <div class="fundo_menu">
+        <div class="logo_senai">
+            <a href="index.html"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
+        </div>
+        <div class="nome_sistema">
+             Programação Web Back End<br>
+             Sistema de atendimento ao cliente
+        </div>
+        {% if user.is_authenticated %}
+        <div class="botao_login">
+            <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
+        </div>
+        {% else %}
+        <div class="botao_login">
+            <a href="accounts/login"><button class="btn btn_login">Login</button></a>
+        </div>
+        {% endif %}
+    </div>
+</header>
+<header class="menu_principal">
+
+</header>
+
+
+
+<nav class="menu">
+    {% if user.is_authenticated %}
+    <ul>
+        <li><a href="">Cadastros</a>
+            <ul>
+                <li><a href="Cad_Cliente.html">Clientes</a></li>
+                <li><a href="Cad_Depto.html">Departamentos</a></li>
+                <li><a href="Cad_Atendente.html">Atendentes</a></li>
+                <li><a href="Cad_Situacao.html">Situações</a></li>
+            </ul>
+        </li>
+        <li><a href="">Consultar</a>
+            <ul>
+                <li><a href="Cons_Cliente.html">Clientes</a></li>
+                <li><a href="Cons_Depto.html">Departamentos</a></li>
+                <li><a href="Cons_Atendente.html">Atendentes</a></li>
+                <li><a href="Cons_Situacao.html">Situações</a></li>
+            </ul>
+        </li>
+        <li><a href="Registrar.html">Registrar Atendimento</a></li>
+        <li><a href="Consultar.html">Consultar Atendimento</a></li>
+        <li><a href="Relatorios.html">Relatórios</a></li>
+        <li> Usuario logado: {{usuario_logado}}</a></li>
+    </ul>
+    {% endif %}
+</nav>
+<body >
+
+</body>
+
+</html>

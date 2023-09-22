@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
     
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
+            <a href="/"><img src="" /></a>
 
         </div>
         <div class="nome_sistema">
@@ -61,26 +62,27 @@
     <div class="principal">
     <div class="container">
         <section class="enquadramento">
-            <h1> Cadastro de Atendentes</h1>
+            <h1> Editando registro Atendente</h1>
         </section>
-        {% if messages %}
+       
             <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
-                {% for mensagem in messages %}
+                
                    <li style="list-style: none;" {% if mensagem.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{mensagem}}</li>
-                {% endfor %}
+               
             </ul>
-        {% endif %}
+       
         
-        <form id="form" class="form" method="POST" action="{% url 'salvar_atend_novo' %}">{% csrf_token %}
+        <form id="form" class="form" method="POST" action="">{% csrf_token %}
 
                 <div class="form-content">
                     <label for="nome">Atendente</label>
-                    <input type="text" id="nome" name="nome_atend" placeholder="Digite o nome do Atendente" />
+                    <input type="hidden"  name="id_atendente" id="id_atendente"  value="{{dados_do_atendente.id}}" />
+                    <input type="text" id="nome" name="nome_atend"  placeholder="Digite o nome do Atendente" />
                     <a>Nome deve ter no mínimo 3 caracteres</a>
                 </div>
                 <div class="form-content">
                     <label for="fone">Telefone</label>
-                    <input type="text" id="nome" name="telefone_atend" placeholder="Digite o telefone do Atendente"  />
+                    <input type="text" id="nome" name="telefone_atend"  placeholder="Digite o telefone do Atendente"  />
                     <a>Telefone deve conter DDD </a>
                 </div>
 
@@ -89,25 +91,34 @@
                     <div class="selection">
                         <select name="user_atend" style="font-size: 14px;  width: 400px; height: 32px; ">
                              <option value="">Selecione o usuário cadastrado para este atendente</option>
-                             {% for igs in cons_users %}
-                             <option value="{{igs}}">{{igs}}</option>
-                             {% endfor %}
+                             
+                               
+                             <option value="XXX" selected>XXX</option>
+                                
+                               
+                            
                         </select>
                     </div>
 
                 </div>
 
-                <div class="form-content">
+                <div class="form-content">{% csrf_token %}
                     <label for="observacao">Observações</label>
-                    <textarea name="observacao_atend" id="observacao" cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
+                    <textarea name="observacao_atend" id="observacao" value="{{dados_do_atendente.observacao_atend}}" cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
                     <a>Observações do cliente</a>
                 </div>
+
+                <div class="check_box">
+                    <label for="ativo">Ativo</label>
+                    <input type="checkbox" name="ativo" id="ativo" checked />
+                    
+                </div>
+
+
                 <div class="botoes">
                     <div class="botao_confirmar">
                         <button type="submit" class="btn_conf_cancel btn_confirmar">Confirmar</button>
                     </div>
-
-
                 </div>
         </form>
 

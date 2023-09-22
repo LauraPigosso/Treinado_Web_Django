@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <link rel="stylesheet" type="text/css" href="{% static 'css/Cons_Cliente_Lista.css' %}">
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
-
+    
     <div class="fundo_menu">
         <div class="logo_senai">
             <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
@@ -32,7 +31,7 @@
         </div>
         {%endif%}
     </div>
-</header>
+</header> 
 
 
 
@@ -60,8 +59,8 @@
         <li><a href="Relatorios.html">Relatórios</a></li>
         <li> | Usuário logado: {{usuario_logado}}</a></li>
         {% endif %}
-    </ul>
-</nav>
+    </ul> 
+</nav>      
 <body>
     <div class="principal">
     <div class="container">
@@ -80,27 +79,28 @@
             {% endfor %}
         </ul>
         {% endif %}
-
-
-
+        
+        
+        
         <!-- https://www.w3schools.com/cssref/index.php -->
+        
+        <form id="form" class="form" method="POST" action="{% url 'cons_atend' %}">{% csrf_token %}
 
-        <form id="form" class="form" method="POST" action="{% url 'Cons_Atendente' %}">{% csrf_token %}
-
+            
             <div class="seleciona_todos">
                 <label for="seleciona_todos">Selecionar Somente Atendentes Ativos </label><br><br>
-                <input type="radio" name="seleciona_todos" checked value="{{dado_pesquisa_todos}}"/> Sim<br />
-                <input type="radio" name="seleciona_todos" value="{{dado_pesquisa_todos}}"/> Não<br />
+                <input type="radio" name="seleciona_todos" checked value="{{dado_pesquisa_atendente_todos}}"/> Sim<br />
+                <input type="radio" name="seleciona_todos" value="{{dado_pesquisa_atendente_todos}}"/> Não<br />
             </div>
             <br><hr><br>
             <div class="form-content">
                 <br>
                 <label for="cliente">Atendente </label>
-                <input type="text" id="atendente" name="atendente" placeholder="Digite o nome do Atendente desejado" value="{{dado_pesquisa_atendente}}" />
+                <input type="text" id="atendente" name="atendente" placeholder="Digite o nome do Atendente desejado" value="{{dado_pesquisa_atendente_atendente}}" />
             </div>
-
-
-
+           
+                
+                
                 <div class="botoes">
                     <div class="botao_consultar">
                         <button id="btnConsultar" type=submit class="btn_cons_cancel btn_consultar">Consultar</button>
@@ -109,7 +109,7 @@
                 </div>
         </form>
         <hr>
-
+       
         <table>
             <tr>
                 <th>Atendente</th>
@@ -118,7 +118,7 @@
                 <th>Editar</th>
             </tr>
 
-            {% for igs in dados_clientes %}
+            {% for igs in todos_atendentes %}
             <tr>
                 <td>{{igs.nome_atend}}</td>
                 <td>{{igs.telefone_atend}}</td>
@@ -126,11 +126,28 @@
                 <td><a href="/edit_atend/{{igs.id}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
             </tr>
             {% endfor %}
+            <section class="paginations">
+                <div class="pagination">
+                     <span class="step-links">
+                    {% if dado_pesquisa_atendente.has_previous %}
+                        <button class="btList"><a style="text-decoration: none;" href="?page=1&dado_pesquisa_atendente={{dado_pesquisa_atendente}}">&laquo; primeira</a></button>
+                        <button class="btList"><a style="text-decoration: none;" href="?page={{ todos_atendentes.previous_page_number }}&dado_pesquisa_atendente={{dado_pesquisa_atendente}}">❮ anterior</a></button>
+                    {% endif %}
 
+                    <span class="current-page">{{ todos_atendentes.number }} de {{todos_atendentes.paginator.num_pages}}</span>
+
+                    {% if dado_pesquisa_atendente.has_next %}
+                        <button class="btList"><a style="text-decoration: none;" href="?page={{ todos_atendentes.next_page_number }}&dado_pesquisa_atendente={{dado_pesquisa_atendente}}">próxima ❯</a></button>
+                        <button class="btList"><a style="text-decoration: none;" href="?page={{ todos_atendentes.paginator.num_pages }}&dado_pesquisa_atendente={{dado_pesquisa_atendente}}">última &raquo;</a></button>
+                    {% endif %}
+                    </span>
+                </div>
+            </section>
+            
         </table>
 
 
-    </div>
+    </div>    
     </div>
 
 <!--<script src="{% static 'js/script.js' %}"></script>-->
@@ -142,16 +159,16 @@
 
 <footer class="rodape">
     <div class="fundo_menu">
-
+        
         <div class="rodape1">
             Escola e Faculdade de Tecnologia Senai "Roberto Mange"<br>
             Curso de Análise e Desenvolvimento de Sistemas.<br>
-
-        </div>
-
-
+         
+        </div>  
+        
+        
     </div>
-</footer>
+</footer> 
 
 
 </html>

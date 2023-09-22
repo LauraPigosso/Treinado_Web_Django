@@ -9,7 +9,7 @@
 
 div.fundo_menu{
     display: inline-block;
-    width: 100%;
+    width: 1600px;
     height: 105px;
     column-count:3;
     position: relative;
@@ -139,7 +139,7 @@ body {
     /* display: flex;  */
     /* justify-content: center; */
     /* align-items: center; */
-    width: 100%;
+    width: 1600px;
     height: 600px;
    }  
 
@@ -180,32 +180,37 @@ body {
     
 }
 
+/* https://www.w3schools.com/cssref/pr_class_display.php */
+/* refrencias para usar display */
 .form{
-    /* faz a label e o campo afastar da borda u pouco */
-    padding: 8px;
+    /* faz a label e o campo afastar da borda um pouco */
+    padding: 16px;
     padding-right: 34px;
 }
 
 .form-content{
     margin-bottom: 8px;
-    padding-bottom: 18px;
+    padding-bottom: 2px;
     position: relative;
 }
 .form-content label{
+    width: 150px;
     display: inline-block;
     margin-bottom: 4px;
+   
+    
 }
 
 .form-content input{
-    display: block;
-    width: 100%;
+    display: inline;
+    width: 70%;
     padding: 8px;
     border: 2px solid #dfdfdf;
 }
 
-.form-content textarea{
-    display:block;
-    width: 100%;
+.form-content select{
+    display: inline;
+    width: 70%;
     padding: 8px;
     border: 2px solid #dfdfdf;
 }
@@ -218,7 +223,7 @@ body {
     visibility: hidden;
    }
  
-.btn_conf_cancel{
+.btn_cons_cancel{
     width: 150px;
     height: 40px;
     border: solid 1px rgb(138, 86, 86);
@@ -244,6 +249,37 @@ body {
 
 }
 
+
+table, th, td{
+    border: 1px solid rgb(88, 85, 85);
+    border-collapse: collapse;
+    padding: 8px;
+}
+table {
+    width: 800px;
+}
+
+
+th{
+    background-color: gray ;
+    color: white
+}
+
+/* Faz a tabela zebrada de 2 em 2 linhas. Para mais linha mudo o 2 pelo numero desejado */
+tr:nth-child(2n){
+    background-color: lightgray;
+}
+
+
+/* Ícone da fonte awesome */
+.fa-solid.fa-pen-to-square, .fa-solid.fa-trash {
+ cursor: pointer;
+ margin: 5px;
+ color: black;
+
+}
+
+
 div.rodape1 {
     text-align: center;
     font-size: 18px;
@@ -252,7 +288,7 @@ div.rodape1 {
     color: rgb(80, 77, 77);
     display: flex;
     /* flex-direction: column; */
-    width: 1920px;
+    width: 1600px;
     padding: 25px;
     justify-content: center;
 }

@@ -36,8 +36,7 @@
         <li><a href="Registrar">Registrar Atendimento</a></li>
         <li><a href="Consultar">Consultar Atendimento</a></li>
         <li><a href="Relatorios">Relatórios</a></li>
-        <li> Usuario logado: {{usuario_logado}}</a></li>
-        <li><a href="TESTE.html">TESTES</a></li>
+        <li> | Usuário logado: {{usuario_logado}}</a></li>
     </ul>
 </nav>
 
@@ -57,6 +56,28 @@
                 {% endfor %}
             </ul>
         {% endif %}
+            {% for contact in page_obj %}
+            {# Each "contact" is a Contact model object. #}
+            {{ contact.full_name|upper }}<br>
+        {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
 
 
@@ -66,15 +87,15 @@
 
             <div class="form-content">
                 <label for="cliente">Cliente</label>
-                <input type="text" id="cliente" name="cliente" placeholder="Digite o nome do Cliente desejado" value="{{ nome }}"/>
+                <input type="text" id="cliente" name="cliente" placeholder="Digite o nome do Cliente desejado" value="{{cliente}}" />
             </div>
             <div class="form-content">
                 <label for="telefone">Telefone</label>
-                <input type="text" id="telefone" name="telefone" placeholder="Digite o telefone do Cliente desejado" value="{{ telefone }}"/>
+                <input type="text" id="telefone" name="telefone" placeholder="Digite o telefone do Cliente desejado" value="{{telefone}}" />
             </div>
             <div class="form-content">
                 <label for="email">E-Mail</label>
-                <input type="text" id="email" name="email" placeholder="Digite o email do Cliente desejado" value="{{ email }}"/>
+                <input type="text" id="email" name="email" placeholder="Digite o email do Cliente desejado" value="{{email}}"/>
             </div>
 
 
@@ -83,7 +104,11 @@
                     <div class="botao_consultar">
                         <button id="btnConsultar" type=submit class="btn_cons_cancel btn_consultar">Consultar</button>
                     </div>
+<!--                    <div class="botao_cancelar">-->
 
+<!--                        <button id="btnCancelar"  class="btn_cons_cancel btn_cancelar">Cancelar</button>-->
+
+<!--                    </div>-->
 
                 </div>
         </form>
@@ -108,23 +133,23 @@
             </tr>
             {% endfor %}
         </table>
+
         <div class="pagination">
             <span class="step-links">
                 {% if dados_clientes.has_previous %}
-                    <a href="?page={{ dados_clientes.previous_page_number }}&nome={{ nome }}&telefone={{ telefone }}&email={{ email }}">Anterior</a>
+                    <a href="?page={{ dados_clientes.previous_page_number }}&cliente={{ cliente }}&email={{ email }}&telefone={{ telefone }}">Anterior</a>
                 {% endif %}
 
-                {% if dados_clientes %}
                 <span class="current">
                     {{ dados_clientes.number }} de {{ dados_clientes.paginator.num_pages }}
                 </span>
-                {% endif %}
 
                 {% if dados_clientes.has_next %}
-                    <a href="?page={{ dados_clientes.next_page_number }}&nome={{ nome }}&telefone={{ telefone }}&email={{ email }}">Próxima</a>
+                    <a href="?page={{ dados_clientes.next_page_number }}&cliente={{ cliente }}&email={{ email }}&telefone={{ telefone }}">Próxima</a>
                 {% endif %}
             </span>
         </div>
+
 
     </div>
     </div>
@@ -148,6 +173,9 @@
 
     </div>
 </footer>
+
+
+
 
 
 </html>

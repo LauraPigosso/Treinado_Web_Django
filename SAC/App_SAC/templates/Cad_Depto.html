@@ -2,16 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
     
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
-
+            <a href="/"><img src="imagens/logo_senai.png" /></a>
         </div>
         <div class="nome_sistema">
              Programação Web Back End<br>
@@ -41,7 +39,7 @@
                 <li><a href="Cad_Atendente.html">Atendentes</a></li>
                 <li><a href="Cad_Situacao.html">Situações</a></li>
             </ul>
-        </li>
+        </li>   
         <li><a href="">Consultar</a>
             <ul>
                 <li><a href="Cons_Cliente.html">Clientes</a></li>
@@ -49,11 +47,10 @@
                 <li><a href="Cons_Atendente.html">Atendentes</a></li>
                 <li><a href="Cons_Situacao.html">Situações</a></li>
             </ul>
-        </li>
+        </li>    
         <li><a href="Registrar.html">Registrar Atendimento</a></li>
         <li><a href="Consultar.html">Consultar Atendimento</a></li>
         <li><a href="Relatorios.html">Relatórios</a></li>
-        <li> | Usuário logado: {{usuario_logado}}</a></li>
         {% endif %}
     </ul> 
 </nav>      
@@ -61,7 +58,7 @@
     <div class="principal">
     <div class="container">
         <section class="enquadramento">
-            <h1> Cadastro de Atendentes</h1>
+            <h1> Cadastro de Departamentos</h1>
         </section>
         {% if messages %}
             <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
@@ -71,42 +68,22 @@
             </ul>
         {% endif %}
         
-        <form id="form" class="form" method="POST" action="{% url 'salvar_atend_novo' %}">{% csrf_token %}
+        <form id="form" class="form" method="POST" action="{% url 'salvar_depto_novo' %}">{% csrf_token %}
 
                 <div class="form-content">
-                    <label for="nome">Atendente</label>
-                    <input type="text" id="nome" name="nome_atend" placeholder="Digite o nome do Atendente" />
+                    <label for="nome">Departamento</label>
+                    <input type="text" id="nome" name="depto" placeholder="Digite o nome do Departamento" />
                     <a>Nome deve ter no mínimo 3 caracteres</a>
                 </div>
                 <div class="form-content">
-                    <label for="fone">Telefone</label>
-                    <input type="text" id="nome" name="telefone_atend" placeholder="Digite o telefone do Atendente"  />
-                    <a>Telefone deve conter DDD </a>
-                </div>
-
-                <div class="form-content">
-                    <label for="usuario">Usuário</label>
-                    <div class="selection">
-                        <select name="user_atend" style="font-size: 14px;  width: 400px; height: 32px; ">
-                             <option value="">Selecione o usuário cadastrado para este atendente</option>
-                             {% for igs in cons_users %}
-                             <option value="{{igs}}">{{igs}}</option>
-                             {% endfor %}
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="form-content">
-                    <label for="observacao">Observações</label>
-                    <textarea name="observacao_atend" id="observacao" cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
-                    <a>Observações do cliente</a>
+                    <label for="observacao">Informações sobre o Departamento</label>
+                    <textarea id="observacao" name="informacao" cols="25" rows="10" placeholder="Digite aqui observações sobre o Departamento"></textarea>
+                    <a>Informações sobre o Departamento</a>
                 </div>
                 <div class="botoes">
                     <div class="botao_confirmar">
                         <button type="submit" class="btn_conf_cancel btn_confirmar">Confirmar</button>
                     </div>
-
 
                 </div>
         </form>
