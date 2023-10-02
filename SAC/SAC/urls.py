@@ -16,10 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from App_SAC.api import viewsets as apisviewsets
+
+route = routers.DefaultRouter()
+route.register(r'api_cliente', apisviewsets.ClienteViewSet, basename="cliente")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('App_SAC.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('usuarios/', include('App_User.urls')),
+    path("accounts/", include('django.contrib.auth.urls')),
+    path('user', include('App_User.urls')),
+
+    path('api/', include(route.urls)),
 ]

@@ -13,11 +13,12 @@
   {% endif %}
 
 
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
-    <title>Programação Web Back End</title>
-</head>
-<header class="login">
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+        <title>Programação Web Back End</title>
+    </head>
+
+    <header class="login">
     
     <div class="fundo_menu">
         <div class="logo_senai">
@@ -75,7 +76,7 @@
         <form id="form" class="form" method="POST" action="{% url 'login' %}">{% csrf_token %}
 
                 <div class="form-content">
-                    <label for="User">Usuário</label>
+                    <label for="username">Usuário</label>
                     <input type="text" id="username" name="username" placeholder="Digite o nome do Usuário" />
                     
                 </div>

@@ -1,22 +1,22 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
-    
+
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="" /></a>
+            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
 
         </div>
         <div class="nome_sistema">
-             Programação Web Back End<br>
-             Sistema de atendimento ao cliente
+            Programação Web Back End<br>
+            Sistema de atendimento ao cliente
         </div>
         {% if user.is_authenticated %}
         <div class="botao_login">
@@ -28,7 +28,7 @@
         </div>
         {% endif %}
     </div>
-</header> 
+</header>
 
 
 
@@ -56,33 +56,34 @@
         <li><a href="Relatorios.html">Relatórios</a></li>
         <li> | Usuário logado: {{usuario_logado}}</a></li>
         {% endif %}
-    </ul> 
-</nav>      
+    </ul>
+</nav>
+
 <body>
     <div class="principal">
-    <div class="container">
-        <section class="enquadramento">
-            <h1> Editando registro Atendente</h1>
-        </section>
-       
-            <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
+        <div class="container">
+            <section class="enquadramento">
+                <h1> Editando registro Atendente</h1>
+            </section>
+
+            <!-- <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
                 
                    <li style="list-style: none;" {% if mensagem.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{mensagem}}</li>
                
-            </ul>
-       
-        
-        <form id="form" class="form" method="POST" action="">{% csrf_token %}
+            </ul> -->
+
+
+            <form id="form" class="form" method="POST" action="{% url 'salvar_atend_editado' %}">{% csrf_token %}
 
                 <div class="form-content">
-                    <label for="nome">Atendente</label>
-                    <input type="hidden"  name="id_atendente" id="id_atendente"  value="{{dados_do_atendente.id}}" />
-                    <input type="text" id="nome" name="nome_atend"  placeholder="Digite o nome do Atendente" />
+                    <label for="nome_atend">Atendente</label>
+                    <input type="hidden" name="id_atend" id="id_atend" value="{{dados_do_atendente.id}}" />
+                    <input type="text" id="nome" name="nome_atend" value="{{dados_do_atendente.nome_atend}}" />
                     <a>Nome deve ter no mínimo 3 caracteres</a>
                 </div>
                 <div class="form-content">
                     <label for="fone">Telefone</label>
-                    <input type="text" id="nome" name="telefone_atend"  placeholder="Digite o telefone do Atendente"  />
+                    <input type="text" id="nome" name="telefone_atend" value="{{dados_do_atendente.telefone_atend}}" />
                     <a>Telefone deve conter DDD </a>
                 </div>
 
@@ -90,41 +91,38 @@
                     <label for="usuario">Usuário</label>
                     <div class="selection">
                         <select name="user_atend" style="font-size: 14px;  width: 400px; height: 32px; ">
-                             <option value="">Selecione o usuário cadastrado para este atendente</option>
-                             
-                               
-                             <option value="XXX" selected>XXX</option>
-                                
-                               
-                            
+                            <option value="">Selecione o usuário cadastrado para este atendente</option>
+                            {% for user in cons_users %}
+                            <option value="{{user}}" selected>{{user}}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
                 </div>
 
-                <div class="form-content">{% csrf_token %}
+                <div class="form-content">
                     <label for="observacao">Observações</label>
-                    <textarea name="observacao_atend" id="observacao" value="{{dados_do_atendente.observacao_atend}}" cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
+                    <textarea name="observacao_atend" id="observacao" value="{{dados_do_atendente.observacao_atend}}"
+                        cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
                     <a>Observações do cliente</a>
                 </div>
 
                 <div class="check_box">
                     <label for="ativo">Ativo</label>
-                    <input type="checkbox" name="ativo" id="ativo" checked />
-                    
-                </div>
+                    <input type="checkbox" name="ativo_atend" id="ativo" checked />
 
+                </div>
 
                 <div class="botoes">
                     <div class="botao_confirmar">
                         <button type="submit" class="btn_conf_cancel btn_confirmar">Confirmar</button>
                     </div>
                 </div>
-        </form>
+            </form>
 
 
 
-    </div>    
+        </div>
     </div>
 </body>
 
@@ -134,14 +132,15 @@
 
 <footer class="rodape">
     <div class="fundo_menu">
-        
+
         <div class="rodape1">
             Escola e Faculdade de Tecnologia Senai "Roberto Mange"<br>
             Curso de Análise e Desenvolvimento de Sistemas.<br>
-         
-        </div>  
-        
-        
+
+        </div>
+
+
     </div>
-</footer> 
+</footer>
+
 </html>

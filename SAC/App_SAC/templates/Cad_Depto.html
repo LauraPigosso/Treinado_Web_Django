@@ -2,28 +2,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Cad_Cliente.css' %}">
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
     
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="imagens/logo_senai.png" /></a>
+            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
         </div>
         <div class="nome_sistema">
              Programação Web Back End<br>
              Sistema de atendimento ao cliente
         </div>
-        {% if user.is_authenticated %}
+        
         <div class="botao_login">
             <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
         </div>
-        {% else %}
+        
         <div class="botao_login">
             <a href="accounts/login"><button class="btn btn_login">Login</button></a>
         </div>
-        {% endif %}
+        
     </div>
 </header> 
 
@@ -31,7 +31,6 @@
 
 <nav class="menu">
     <ul>
-        {% if user.is_authenticated %}
         <li><a href="">Cadastros</a>
             <ul>
                 <li><a href="Cad_Cliente.html">Clientes</a></li>
@@ -51,7 +50,6 @@
         <li><a href="Registrar.html">Registrar Atendimento</a></li>
         <li><a href="Consultar.html">Consultar Atendimento</a></li>
         <li><a href="Relatorios.html">Relatórios</a></li>
-        {% endif %}
     </ul> 
 </nav>      
 <body>
@@ -60,6 +58,7 @@
         <section class="enquadramento">
             <h1> Cadastro de Departamentos</h1>
         </section>
+        
         {% if messages %}
             <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
                 {% for mensagem in messages %}
@@ -69,7 +68,7 @@
         {% endif %}
         
         <form id="form" class="form" method="POST" action="{% url 'salvar_depto_novo' %}">{% csrf_token %}
-
+            
                 <div class="form-content">
                     <label for="nome">Departamento</label>
                     <input type="text" id="nome" name="depto" placeholder="Digite o nome do Departamento" />

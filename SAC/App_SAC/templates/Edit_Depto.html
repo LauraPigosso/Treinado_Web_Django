@@ -1,7 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="'css/main.css'">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
     <title>Programação Web Back End</title>
 </head>
@@ -9,18 +10,22 @@
     
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="imagens/logo_senai.png" /></a>
+            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
 
         </div>
         <div class="nome_sistema">
              Programação Web Back End<br>
              Sistema de atendimento ao cliente
         </div>
-        
+        {% if user.is_authenticated %}
+        <div class="botao_login">
+            <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
+        </div>
+        {% else %}
         <div class="botao_login">
             <a href="accounts/login"><button class="btn btn_login">Login</button></a>
         </div>
-        
+        {% endif %}
         
     </div>
 </header> 
@@ -59,21 +64,13 @@
         <section class="enquadramento">
             <h1> Editando Departamento</h1>
         </section>
-        
-        
-            <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
-        
-                   <li style="list-style: none;" >MENSAGEM DO SERVIDOR</li>
-        
-            </ul>
-        
-        
-        
-        <form id="form" class="form">
+
+        <form id="form" class="form" method="POST" action="{% url 'salvar_depto_editado' %}">{% csrf_token %}
 
                 <div class="form-content">
+                    <input type="hidden" id="id_depto" name="id_depto" value="{{dados_do_depto.id_depto}}"/>
+
                     <label for="depto">Departamento</label>
-                    
                     <input type="text" id="depto" name="depto" value="{{dados_do_depto.descricao_departamento}}" placeholder="Digite o Departamento" />
                     <a>Nome deve ter no mínimo 3 caracteres</a>
                 </div>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static './css/main.css' %}">
 
     <title>Programação Web Back End</title>
 </head>
@@ -17,19 +17,13 @@
              Programação Web Back End<br>
              Sistema de atendimento ao cliente
         </div>
-        {% if user.is_authenticated %}
+        
         <div class="botao_login">
             <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
         </div>
-        {% else %}
-        <div class="botao_login">
-            <a href="accounts/login"><button class="btn btn_login">Login</button></a>
-        </div>
-        {% endif %}
+        
     </div>
-</header> 
-
-
+</header>
 
 <nav class="menu">
     <ul>
@@ -53,10 +47,10 @@
         <li><a href="Registrar.html">Registrar Atendimento</a></li>
         <li><a href="Consultar.html">Consultar Atendimento</a></li>
         <li><a href="Relatorios.html">Relatórios</a></li>
-        <li> | Usuário logado: {{usuario_logado}}</a></li>
+        <li> | Usuário logado: XXXX</li>
         {% endif %}
-    </ul> 
-</nav>      
+    </ul>
+</nav>
 <body>
     <div class="principal">
     <div class="container">
@@ -80,18 +74,18 @@
                 </div>
                 <div class="form-content">
                     <label for="fone">Telefone</label>
-                    <input type="text" id="nome" name="telefone_atend" placeholder="Digite o telefone do Atendente"  />
+                    <input type="text" id="fone" name="telefone_atend" placeholder="Digite o telefone do Atendente"  />
                     <a>Telefone deve conter DDD </a>
                 </div>
 
                 <div class="form-content">
-                    <label for="usuario">Usuário</label>
+                    <p>Usuário</p>
                     <div class="selection">
-                        <select name="user_atend" style="font-size: 14px;  width: 400px; height: 32px; ">
-                             <option value="">Selecione o usuário cadastrado para este atendente</option>
-                             {% for igs in cons_users %}
-                             <option value="{{igs}}">{{igs}}</option>
-                             {% endfor %}
+                        <select id='user_atend' name="user_atend" style="font-size: 14px;  width: 400px; height: 32px; ">
+                            <option value="">Selecione o usuário cadastrado para este atendente</option>
+                            {% for user in cons_users %}
+                                <option value="{{user}}">{{user}}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
@@ -99,7 +93,7 @@
 
                 <div class="form-content">
                     <label for="observacao">Observações</label>
-                    <textarea name="observacao_atend" id="observacao" cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente"></textarea>
+                    <textarea name="observacao_atend" id="observacao" cols="25" rows="10" placeholder="Digite aqui observações sobre o atendente"></textarea>
                     <a>Observações do cliente</a>
                 </div>
                 <div class="botoes">

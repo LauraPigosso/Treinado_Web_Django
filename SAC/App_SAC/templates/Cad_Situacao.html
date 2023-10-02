@@ -1,15 +1,15 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Cad_Cliente.css' %}">
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
     
     <div class="fundo_menu">
         <div class="logo_senai">
-            <a href="/"><img src="imagens/logo_senai.png" /></a>
+            <a href="/"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
         </div>
         <div class="nome_sistema">
              Programação Web Back End<br>
@@ -61,15 +61,16 @@
             <h1> Cadastro de Situações (ou Status)</h1>
         </section>
         
-          
+        {% if messages %}
             <ul class="mensagem_do_servidor" style="background: #7d7f81; padding: 24px; text-align:center; color: #fff;">
-                
-                   <li style="list-style: none;" >MENSAGEM DO SERVIDOR</li>
-                {
+                {% for mensagem in messages %}
+                   <li style="list-style: none;" {% if mensagem.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{mensagem}}</li>
+                {% endfor %}
             </ul>
+        {% endif %}
         
         
-        <form id="form" class="form" ></form>
+        <form id="form" class="form" method="POST" action="{% url 'salvar_situacao_nova' %}">{% csrf_token %}
             
                 <div class="form-content">
                     <label for="nome">Situação(ou Status)</label>

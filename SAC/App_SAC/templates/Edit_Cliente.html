@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Programação Web Back End</title>
 </head>
 <header class="login">
@@ -16,9 +16,15 @@
              Programação Web Back End<br>
              Sistema de atendimento ao cliente
         </div>
+        {% if user.is_authenticated %}
         <div class="botao_login">
-            <button class="btn btn_login">Login</button>
-        </div> 
+            <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
+        </div>
+        {% else %}
+        <div class="botao_login">
+            <a href="accounts/login"><button class="btn btn_login">Login</button></a>
+        </div>
+        {% endif %}
     </div>
 </header> 
 
@@ -26,6 +32,7 @@
 
 <nav class="menu">
     <ul>
+        {% if user.is_authenticated %}
         <li><a href="">Cadastros</a>
             <ul>
                 <li><a href="Cad_Cliente.html">Clientes</a></li>
@@ -33,7 +40,7 @@
                 <li><a href="Cad_Atendente.html">Atendentes</a></li>
                 <li><a href="Cad_Situacao.html">Situações</a></li>
             </ul>
-        </li>   
+        </li>
         <li><a href="">Consultar</a>
             <ul>
                 <li><a href="Cons_Cliente.html">Clientes</a></li>
@@ -41,12 +48,12 @@
                 <li><a href="Cons_Atendente.html">Atendentes</a></li>
                 <li><a href="Cons_Situacao.html">Situações</a></li>
             </ul>
-        </li>    
+        </li>
         <li><a href="Registrar.html">Registrar Atendimento</a></li>
         <li><a href="Consultar.html">Consultar Atendimento</a></li>
         <li><a href="Relatorios.html">Relatórios</a></li>
-        <li> Usuario logado: {{usuario_logado}}</a></li>
-
+        <li> | Usuário logado: {{usuario_logado}}</a></li>
+        {% endif %}
     </ul> 
 </nav>      
 <body>
@@ -62,22 +69,22 @@
                <div class="form-content">
                    <label for="nome">Cliente</label>
                    <input type="hidden"  name="id_cliente" id="id_cliente"  value="{{dados_do_cliente.id}}" />
-                   <input type="text"  name="nome" id="nome"  value="{{dados_do_cliente.nome}}" placeholder="Digite o nome do Cliente" />
+                   <input type="text"  name="nome" id="nome"  value="{{dados_do_cliente.nome}}" />
                     <a>Nome deve ter no mínimo 3 caracteres</a>
                 </div>
                 <div class="form-content">
                     <label for="telefone">Telefone</label>
-                    <input type="text" name="telefone" id="telefone" value="{{dados_do_cliente.telefone}}" placeholder="Digite o telefone do Cliente"  />
+                    <input type="text" name="telefone" id="telefone" value="{{dados_do_cliente.telefone}}" />
                     <a>Telefone deve conter DDD </a>
                 </div>
                 <div class="form-content">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="{{dados_do_cliente.email}}" placeholder="Digite o email do Cliente"  />
-                    <a>Digite um endereço de email válido</a>
-                </div>
-                <div class="form-content">
-                    <label for="observacao">Observações</label>
-                    <textarea name="observacao" id="observacao"  cols="25" rows="10" placeholder="Digite aqui observações sobre o cliente">{{dados_do_cliente.observacao}}</textarea>
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" value="{{dados_do_cliente.email}}" />
+                  <a>Digite um endereço de email válido</a>
+              </div>
+              <div class="form-content">
+                  <label for="observacao">Observações</label>
+                    <textarea name="observacao" id="observacao"  cols="25" rows="10" >{{dados_do_cliente.observacao}}</textarea>
                     <a>Observações do cliente</a>
                 </div>
                 <div class="botoes">

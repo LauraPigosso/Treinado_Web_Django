@@ -8,8 +8,8 @@ const observacao = document.getElementById("observacao");
 let btnConfirmar = document.querySelector("#btnConfirmar");
 let btnCancelar = document.querySelector("#btnCancelar");
 
-btnConfirmar.addEventListener("click", (event) =>{
-    event.preventDefault();
+btnConfirmar.addEventListener("click", (e) => {
+    e.preventDefault();
     valida_dados();
 })
 
